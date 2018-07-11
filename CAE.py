@@ -106,7 +106,7 @@ for epoch_i in range(epochs):
             data_batch = data_train[b_size * step: b_size * step + b_size]
         else:
             data_batch = data_train[b_size * step:]
-        for filename, label in np.concatenate((data_batch, hos_data_train)):
+        for filename, label in data_batch:
             img = nib.load(filename)
             image_data = img.get_data()
             image_data = np.nan_to_num(
@@ -133,7 +133,7 @@ for epoch_i in range(epochs):
             data_batch = data_train[b_size * step: b_size * step + b_size]
         else:
             data_batch = data_train[b_size * step:]
-        for filename, label in np.concatenate((data_batch, hos_data_train)):
+        for filename, label in data_batch:
             img = nib.load(filename)
             image_data = img.get_data()
             image_data = np.nan_to_num(
@@ -168,7 +168,7 @@ for epoch_i in range(epochs):
             data_batch = data_train[b_size * step: b_size * step + b_size]
         else:
             data_batch = data_train[b_size * step:]
-        for filename, label in np.concatenate((data_batch, hos_data_train)):
+        for filename, label in data_batch:
             img = nib.load(filename)
             image_data = img.get_data()
             image_data = np.nan_to_num(
