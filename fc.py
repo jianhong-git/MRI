@@ -44,7 +44,7 @@ num_train = 382 - 38
 num_test = 0
 
 
-fc = fully_connected(10 * 12 * 10 * 8, 2)
+fc = fully_connected(10 * 12 * 10 * 8, 3)
 optimizer = tf.train.AdamOptimizer(learning_rate).minimize(fc['loss'])
 
 sess = tf.Session()
