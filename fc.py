@@ -40,7 +40,7 @@ learning_rate = 1e-4
 epochs = 1000
 batch_size = 1
 display_step = 100
-num_train = 382 - 38
+num_train = 344 #tri
 num_test = 0
 
 
@@ -84,9 +84,9 @@ for epoch_i in range(epochs):
         labels = np.array(batch_labels).reshape([size])
         _, loss = sess.run([optimizer, fc['loss']], feed_dict={
                            fc['x']: input_data, fc['labels']: labels})
-        if (step + 1) % 10 == 0:
-            print("step", step + 1, "in epoch", epoch_i, "loss:", loss)
-            loss_all[epoch_i] = loss
+        # if (step + 1) % 10 == 0:
+        #     print("step", step + 1, "in epoch", epoch_i, "loss:", loss)
+        #     loss_all[epoch_i] = loss
         step += 1
     if (epoch_i + 1) % 10 == 0:
         val_data = []
