@@ -62,7 +62,7 @@ accuracy_all = np.zeros(epochs // 10 + 1)
 
 print("##########################")
 print("Traing Fully Connected Layers!")
-b_size = 16
+b_size = 8
 print(len(data_list))
 num_batches = num_train // b_size
 if num_train % b_size != 0:
