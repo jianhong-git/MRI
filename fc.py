@@ -81,7 +81,7 @@ for epoch_i in range(epochs):
             data = np.load(filename + "_conv.npy")
             batch_data.append(data.reshape([1, -1]))
             batch_labels.append(int(label))
-        print(epoch_i, index, data.reshape([1, -1]), batch_data)
+        # print(epoch_i, index, data.reshape([1, -1]), batch_data)
         input_data = np.array(batch_data).reshape([size, -1])
         labels = np.array(batch_labels).reshape([size])
         _, loss = sess.run([optimizer, fc['loss']], feed_dict={
@@ -101,7 +101,7 @@ for epoch_i in range(epochs):
         labels = np.array(val_labels).reshape([len(data_val)])
         accuracy = sess.run(fc['correct'], feed_dict={
                             fc['x']: input_data, fc['labels']: labels})
-        print("Validation accuracy:", accuracy, "of", len(data_val))
+        print('epoch = %d'%(epoch_i+1)+'\n'+"Validation accuracy:", accuracy, "of", len(data_val))
         accuracy_all[(epoch_i + 1) // 10 - 1] = accuracy
 
 
