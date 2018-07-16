@@ -36,8 +36,9 @@ def fully_connected(num_pix, num_classes):
             'W_fc1': W_fc1, 'W_fc2': W_fc2, 'W_fc3': W_fc3, 'b_fc1': b_fc1, 'b_fc2': b_fc2, 'b_fc3': b_fc3}
 
 
-learning_rate = tf.train.exponential_decay(1e-3, 0,
-                                           100, 0.5, staircase=True)
+global_step = tf.Variable(0, trainable=False)
+learning_rate = tf.train.exponential_decay(1e-3, global_step,
+                                           200, 0.5, staircase=True)
 epochs = 2000
 batch_size = 1
 display_step = 100
@@ -46,7 +47,8 @@ num_test = 0
 
 
 fc = fully_connected(10 * 12 * 10 * 8, 2)
-optimizer = tf.train.AdamOptimizer(learning_rate).minimize(fc['loss'])
+optimizer = tf.train.AdamOptimizer(learning_rate).minimize(
+    fc['loss'], global_step=global_step)
 
 sess = tf.Session()
 sess.run(tf.global_variables_initializer())
@@ -56,13 +58,13 @@ num_data = len(data_list)
 data_train = data_list[0:num_train]
 data_test = data_list[num_train: (num_train + num_test)]
 data_val = data_list[(num_train + num_test):]
-loss_all = np.zeros(epochs )
+loss_all = np.zeros(epochs)
 accuracy_all = np.zeros(epochs // 10 + 1)
 
 
 print("##########################")
 print("Traing Fully Connected Layers!")
-b_size = 8
+b_size = 10
 print(len(data_list))
 num_batches = num_train // b_size
 if num_train % b_size != 0:
@@ -105,7 +107,7 @@ for epoch_i in range(epochs):
         # loss = sess.run(fc['loss'], feed_dict={
         #     fc['x']: input_data, fc['labels']: labels})
         print('epoch = %d' % (epoch_i + 1) + '\n' +
-              "Validation loss:", loss, '\n' +
+              "Training loss:", loss, '\n' +
               "Validation accuracy:", accuracy, "of", len(data_val))
         # loss_all[(epoch_i + 1) // 10 - 1] = loss
         accuracy_all[(epoch_i + 1) // 10 - 1] = accuracy
