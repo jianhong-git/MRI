@@ -40,17 +40,17 @@ learning_rate = 1e-4
 epochs = 1000
 batch_size = 1
 display_step = 100
-num_train = 344 #tri
+num_train = 344  # tri
 num_test = 0
 
 
-fc = fully_connected(10 * 12 * 10 * 8, 3)
+fc = fully_connected(10 * 12 * 10 * 8, 2)
 optimizer = tf.train.AdamOptimizer(learning_rate).minimize(fc['loss'])
 
 sess = tf.Session()
 sess.run(tf.global_variables_initializer())
 
-data_list = np.load('ADNI_data_list.npy')
+data_list = np.load('ADNI_data_list_an.npy')
 num_data = len(data_list)
 data_train = data_list[0:num_train]
 data_test = data_list[num_train: (num_train + num_test)]
