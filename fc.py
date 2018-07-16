@@ -36,9 +36,9 @@ def fully_connected(num_pix, num_classes):
             'W_fc1': W_fc1, 'W_fc2': W_fc2, 'W_fc3': W_fc3, 'b_fc1': b_fc1, 'b_fc2': b_fc2, 'b_fc3': b_fc3}
 
 
-global_step = tf.Variable(0, trainable=False)
+# global_step = tf.Variable(0, trainable=False)
 # learning_rate = tf.train.exponential_decay(1e-3, global_step,200, 0.5, staircase=True)
-learning_rate = 1e-3
+learning_rate = 1e-4
 epochs = 2000
 batch_size = 1
 display_step = 100
@@ -47,8 +47,7 @@ num_test = 0
 
 
 fc = fully_connected(10 * 12 * 10 * 8, 2)
-optimizer = tf.train.AdamOptimizer(learning_rate).minimize(
-    fc['loss'])
+optimizer = tf.train.AdamOptimizer(learning_rate).minimize(fc['loss'])
 
 sess = tf.Session()
 sess.run(tf.global_variables_initializer())
@@ -128,8 +127,8 @@ for epoch_i in range(epochs):
 np.savetxt("./result/loss.txt", loss_all, fmt='%10.5f', delimiter=",")
 np.savetxt("./result/accuracy.txt", accuracy_all, fmt='%.u', delimiter=",")
 
-saver = tf.train.Saver({'W_fc1': fc['W_fc1'], 'W_fc2': fc['W_fc2'], 'W_fc3': fc['W_fc3'],
-                        'b_fc1': fc['b_fc1'], 'b_fc2': fc['b_fc2'], 'b_fc3': fc['b_fc3']})
+# saver = tf.train.Saver({'W_fc1': fc['W_fc1'], 'W_fc2': fc['W_fc2'], 'W_fc3': fc['W_fc3'],
+#                         'b_fc1': fc['b_fc1'], 'b_fc2': fc['b_fc2'], 'b_fc3': fc['b_fc3']})
 # save_path = saver.save(sess, "./train/fc.ckpt")
 
 time2 = time.time()
