@@ -36,7 +36,8 @@ def fully_connected(num_pix, num_classes):
             'W_fc1': W_fc1, 'W_fc2': W_fc2, 'W_fc3': W_fc3, 'b_fc1': b_fc1, 'b_fc2': b_fc2, 'b_fc3': b_fc3}
 
 
-learning_rate = 1e-3
+learning_rate = tf.train.exponential_decay(1e-3, 0,
+                                           100, 0.5, staircase=True)
 epochs = 2000
 batch_size = 1
 display_step = 100
