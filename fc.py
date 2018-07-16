@@ -40,7 +40,7 @@ learning_rate = 1e-4
 epochs = 1000
 batch_size = 1
 display_step = 100
-num_train = 344  # tri
+num_train = 234-23  # tri
 num_test = 0
 
 
@@ -62,6 +62,7 @@ accuracy_all = np.zeros(102)
 print("##########################")
 print("Traing Fully Connected Layers!")
 b_size = 10
+print(len(data_list))
 num_batches = num_train // b_size
 if num_train % b_size != 0:
     num_batches += 1
@@ -80,6 +81,7 @@ for epoch_i in range(epochs):
             data = np.load(filename + "_conv.npy")
             batch_data.append(data.reshape([1, -1]))
             batch_labels.append(int(label))
+        print(epoch_i, index, data.reshape([1, -1]), batch_data)
         input_data = np.array(batch_data).reshape([size, -1])
         labels = np.array(batch_labels).reshape([size])
         _, loss = sess.run([optimizer, fc['loss']], feed_dict={
