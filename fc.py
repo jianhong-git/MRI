@@ -37,7 +37,7 @@ def fully_connected(num_pix, num_classes):
 
 
 learning_rate = 1e-4
-epochs = 1000
+epochs = 2000
 batch_size = 1
 display_step = 100
 num_train = 234 - 23  # tri
@@ -55,8 +55,8 @@ num_data = len(data_list)
 data_train = data_list[0:num_train]
 data_test = data_list[num_train: (num_train + num_test)]
 data_val = data_list[(num_train + num_test):]
-loss_all = np.zeros(1001)
-accuracy_all = np.zeros(102)
+loss_all = np.zeros(epochs // 10 + 1)
+accuracy_all = np.zeros(epochs // 10 + 1)
 
 
 print("##########################")
@@ -105,6 +105,7 @@ for epoch_i in range(epochs):
             fc['x']: input_data, fc['labels']: labels})
         print('epoch = %d' % (epoch_i + 1) + '\n' + "Validation loss:",
               loss + '\n' + "Validation accuracy:", accuracy, "of", len(data_val))
+        loss_all[(epoch_i + 1) // 10 - 1] = loss
         accuracy_all[(epoch_i + 1) // 10 - 1] = accuracy
 
 
@@ -120,8 +121,8 @@ for epoch_i in range(epochs):
 # print("Test accuracy:", accuracy, "of", len(data_test))
 # accuracy_all[-1]=accuracy
 
-np.savetxt("./train/loss.txt", loss_all, fmt='%10.5f', delimiter=",")
-np.savetxt("./train/accuracy.txt", accuracy_all, fmt='%.u', delimiter=",")
+np.savetxt("./result/loss.txt", loss_all, fmt='%10.5f', delimiter=",")
+np.savetxt("./result/accuracy.txt", accuracy_all, fmt='%.u', delimiter=",")
 
 saver = tf.train.Saver({'W_fc1': fc['W_fc1'], 'W_fc2': fc['W_fc2'], 'W_fc3': fc['W_fc3'],
                         'b_fc1': fc['b_fc1'], 'b_fc2': fc['b_fc2'], 'b_fc3': fc['b_fc3']})
