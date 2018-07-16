@@ -103,8 +103,10 @@ for epoch_i in range(epochs):
                             fc['x']: input_data, fc['labels']: labels})
         loss = sess.run(fc['loss'], feed_dict={
             fc['x']: input_data, fc['labels']: labels})
-        print('epoch = %d' % (epoch_i + 1) + '\n' + "Validation loss:",
-              loss + '\n' + "Validation accuracy:", accuracy, "of", len(data_val))
+        print(loss)
+        print('epoch = %d' % (epoch_i + 1) + '\n' +
+              "Validation loss:", loss, '\n' +
+              "Validation accuracy:", accuracy, "of", len(data_val))
         loss_all[(epoch_i + 1) // 10 - 1] = loss
         accuracy_all[(epoch_i + 1) // 10 - 1] = accuracy
 
