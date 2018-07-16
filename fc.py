@@ -36,7 +36,7 @@ def fully_connected(num_pix, num_classes):
             'W_fc1': W_fc1, 'W_fc2': W_fc2, 'W_fc3': W_fc3, 'b_fc1': b_fc1, 'b_fc2': b_fc2, 'b_fc3': b_fc3}
 
 
-learning_rate = 1e-4
+learning_rate = 1e-3
 epochs = 2000
 batch_size = 1
 display_step = 100
@@ -61,7 +61,7 @@ accuracy_all = np.zeros(epochs // 10 + 1)
 
 print("##########################")
 print("Traing Fully Connected Layers!")
-b_size = 10
+b_size = 16
 print(len(data_list))
 num_batches = num_train // b_size
 if num_train % b_size != 0:
@@ -128,7 +128,7 @@ np.savetxt("./result/accuracy.txt", accuracy_all, fmt='%.u', delimiter=",")
 
 saver = tf.train.Saver({'W_fc1': fc['W_fc1'], 'W_fc2': fc['W_fc2'], 'W_fc3': fc['W_fc3'],
                         'b_fc1': fc['b_fc1'], 'b_fc2': fc['b_fc2'], 'b_fc3': fc['b_fc3']})
-save_path = saver.save(sess, "./train/fc.ckpt")
+# save_path = saver.save(sess, "./train/fc.ckpt")
 
 time2 = time.time()
 print(time2 - time1)
