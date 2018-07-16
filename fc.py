@@ -40,7 +40,7 @@ learning_rate = 1e-4
 epochs = 1000
 batch_size = 1
 display_step = 100
-num_train = 234-23  # tri
+num_train = 234 - 23  # tri
 num_test = 0
 
 
@@ -101,7 +101,10 @@ for epoch_i in range(epochs):
         labels = np.array(val_labels).reshape([len(data_val)])
         accuracy = sess.run(fc['correct'], feed_dict={
                             fc['x']: input_data, fc['labels']: labels})
-        print('epoch = %d'%(epoch_i+1)+'\n'+"Validation accuracy:", accuracy, "of", len(data_val))
+        loss = sess.run(fc['loss'], feed_dict={
+            fc['x']: input_data, fc['labels']: labels})
+        print('epoch = %d' % (epoch_i + 1) + '\n' + "Validation loss:",
+              loss + '\n' + "Validation accuracy:", accuracy, "of", len(data_val))
         accuracy_all[(epoch_i + 1) // 10 - 1] = accuracy
 
 
