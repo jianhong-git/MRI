@@ -37,8 +37,8 @@ def fully_connected(num_pix, num_classes):
 
 
 global_step = tf.Variable(0, trainable=False)
-learning_rate = tf.train.exponential_decay(1e-3, global_step,
-                                           200, 0.5, staircase=True)
+# learning_rate = tf.train.exponential_decay(1e-3, global_step,200, 0.5, staircase=True)
+global_step = 1e-3
 epochs = 2000
 batch_size = 1
 display_step = 100
