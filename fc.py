@@ -36,9 +36,10 @@ def fully_connected(num_pix, num_classes):
             'W_fc1': W_fc1, 'W_fc2': W_fc2, 'W_fc3': W_fc3, 'b_fc1': b_fc1, 'b_fc2': b_fc2, 'b_fc3': b_fc3}
 
 
-# global_step = tf.Variable(0, trainable=False)
-# learning_rate = tf.train.exponential_decay(1e-3, global_step,200, 0.5, staircase=True)
-learning_rate = 1e-4
+global_step = tf.Variable(0, trainable=False)
+learning_rate = tf.train.exponential_decay(
+    1e-3, global_step, 200, 0.5, staircase=True)
+# learning_rate = 1e-4
 epochs = 2000
 batch_size = 1
 display_step = 100
@@ -47,7 +48,8 @@ num_test = 0
 
 
 fc = fully_connected(10 * 12 * 10 * 8, 2)
-optimizer = tf.train.AdamOptimizer(learning_rate).minimize(fc['loss'])
+optimizer = tf.train.AdamOptimizer(learning_rate).minimize(
+    fc['loss'], global_step=global_step)
 
 sess = tf.Session()
 sess.run(tf.global_variables_initializer())
