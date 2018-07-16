@@ -56,7 +56,7 @@ num_data = len(data_list)
 data_train = data_list[0:num_train]
 data_test = data_list[num_train: (num_train + num_test)]
 data_val = data_list[(num_train + num_test):]
-loss_all = np.zeros(epochs // 10 + 1)
+loss_all = np.zeros(epochs )
 accuracy_all = np.zeros(epochs // 10 + 1)
 
 
@@ -89,7 +89,7 @@ for epoch_i in range(epochs):
                            fc['x']: input_data, fc['labels']: labels})
         # if (step + 1) % 10 == 0:
         #     print("step", step + 1, "in epoch", epoch_i, "loss:", loss)
-        #     loss_all[epoch_i] = loss
+        loss_all[epoch_i] = loss
         step += 1
     if (epoch_i + 1) % 10 == 0:
         val_data = []
@@ -102,13 +102,12 @@ for epoch_i in range(epochs):
         labels = np.array(val_labels).reshape([len(data_val)])
         accuracy = sess.run(fc['correct'], feed_dict={
                             fc['x']: input_data, fc['labels']: labels})
-        loss = sess.run(fc['loss'], feed_dict={
-            fc['x']: input_data, fc['labels']: labels})
-        print(loss)
+        # loss = sess.run(fc['loss'], feed_dict={
+        #     fc['x']: input_data, fc['labels']: labels})
         print('epoch = %d' % (epoch_i + 1) + '\n' +
               "Validation loss:", loss, '\n' +
               "Validation accuracy:", accuracy, "of", len(data_val))
-        loss_all[(epoch_i + 1) // 10 - 1] = loss
+        # loss_all[(epoch_i + 1) // 10 - 1] = loss
         accuracy_all[(epoch_i + 1) // 10 - 1] = accuracy
 
 
