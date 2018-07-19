@@ -55,7 +55,7 @@ saver4 = tf.train.Saver({'W_fc1': fc['W_fc1'], 'W_fc2': fc['W_fc2'], 'W_fc3': fc
 sess = tf.Session()
 sess.run(tf.global_variables_initializer())
 
-data_list = np.load('301_data_list.npy')
+data_list = np.load('./datalist/301_data_list.npy')
 num_data = len(data_list)
 data_train = data_list[0:num_train]
 data_test = data_list[num_train: (num_train + num_test)]
