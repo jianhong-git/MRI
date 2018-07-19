@@ -12,11 +12,11 @@ def fully_connected(num_pix, num_classes):
     x = tf.placeholder(tf.float32, [None, num_pix], name='fc_input')
     labels = tf.placeholder(tf.int64, shape=[None])
     W_fc1 = tf.Variable(tf.truncated_normal(
-        [num_pix, 600], stddev=0.1), name='fc1_weights')
+        [num_pix, 500], stddev=0.1), name='fc1_weights')
     b_fc1 = tf.Variable(tf.truncated_normal(
-        [600], stddev=0.1), name='fc1_biases')
+        [500], stddev=0.1), name='fc1_biases')
     W_fc2 = tf.Variable(tf.truncated_normal(
-        [600, 100], stddev=0.1), name='fc2_weights')
+        [500, 100], stddev=0.1), name='fc2_weights')
     b_fc2 = tf.Variable(tf.truncated_normal(
         [100], stddev=0.1), name='fc2_biases')
     W_fc3 = tf.Variable(tf.truncated_normal(
