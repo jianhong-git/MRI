@@ -49,7 +49,7 @@ num_test = 0
 
 fc = fully_connected(10 * 12 * 10 * 8, 2)
 optimizer = tf.train.AdamOptimizer(learning_rate).minimize(
-    fc['loss'], global_step=global_step)
+    fc['loss'])#, global_step=global_step
 
 sess = tf.Session()
 sess.run(tf.global_variables_initializer())
