@@ -74,13 +74,13 @@ optimizer = tf.train.AdamOptimizer(learning_rate).minimize(fc['loss'])
 sess = tf.Session()
 sess.run(tf.global_variables_initializer())
 
-data_list = np.load('ADNI_data_list.npy')
+data_list = np.load('./datalist/ADNI_data_list.npy')
 num_data = len(data_list)
 data_train = data_list[0:num_train]
 data_test = data_list[num_train: (num_train + num_test)]
 data_val = data_list[(num_train + num_test):]
 
-hos_data_list = np.load('301_data_list.npy')
+hos_data_list = np.load('./datalist/301_data_list.npy')
 num_data = len(data_list)
 hos_data_train = hos_data_list[0:100]
 hos_data = []
