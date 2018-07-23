@@ -56,7 +56,7 @@ def fully_connected(num_pix, num_classes):
 
 
 learning_rate = 0.001
-epochs = 1  # 200
+epochs = 200  # 200
 batch_size = 1
 display_step = 10
 num_train = 382
