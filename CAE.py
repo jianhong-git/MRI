@@ -121,7 +121,7 @@ for epoch_i in range(epochs):
 
 print("First Conv Layer Optimization Finished!")
 saver = tf.train.Saver({'w1': ae1['W'], 'b1': ae1['b']})
-save_path = saver.save(sess, "./train/CAE1.ckpt")
+save_path = saver.save(sess, "./train/model2/CAE1.ckpt")
 print ("Model saved in file: ", save_path)
 
 print("##########################")
@@ -150,7 +150,7 @@ for epoch_i in range(epochs):
 
 print("Second Conv Layer Optimization Finished!")
 saver = tf.train.Saver({'w2': ae2['W'], 'b2': ae2['b']})
-save_path = saver.save(sess, "./train/CAE2.ckpt")
+save_path = saver.save(sess, "./train/model2/CAE2.ckpt")
 print ("Model saved in file: ", save_path)
 
 # saver1 = tf.train.Saver({'w1':ae1['W'], 'b1': ae1['b']})
@@ -187,7 +187,7 @@ for epoch_i in range(epochs):
 
 print("Third Conv Layer Optimization Finished!")
 saver = tf.train.Saver({'w3': ae3['W'], 'b3': ae3['b']})
-save_path = saver.save(sess, "./train/CAE3.ckpt")
+save_path = saver.save(sess, "./train/model2/CAE3.ckpt")
 print ("Model saved in file: ", save_path)
 
 print("##########################")

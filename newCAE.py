@@ -56,7 +56,7 @@ def fully_connected(num_pix, num_classes):
 
 
 learning_rate = 0.001
-epochs = 2  #200
+epochs = 1  # 200
 batch_size = 1
 display_step = 10
 num_train = 382
@@ -204,7 +204,7 @@ for filename, label in data_list:
     data = sess.run(ae2['z'], feed_dict={ae2['x']: h2_input_data})
     input_data = data.reshape([batch_size, -1])
     conv_output = sess.run(ae3['z'], feed_dict={ae3['x']: input_data})
-    np.save('./convdata/model2/%s_conv.npy' % filename, conv_output)
+    np.save(filename + "_conv.npy", conv_output)
     if (index + 1) % 100 == 0:
         print(index + 1, "of", len(data_list), "files saved.")
     index += 1
@@ -221,7 +221,7 @@ for filename, label in hos_data_list:
     data = sess.run(ae2['z'], feed_dict={ae2['x']: h2_input_data})
     input_data = data.reshape([batch_size, -1])
     conv_output = sess.run(ae3['z'], feed_dict={ae3['x']: input_data})
-    np.save('./convdata/model2/%s_conv.npy' % filename, conv_output)
+    np.save(filename + "_conv.npy", conv_output)
     if (index + 1) % 100 == 0:
         print(index + 1, "of", len(data_list), "files saved.")
     index += 1
