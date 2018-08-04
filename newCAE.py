@@ -74,11 +74,11 @@ optimizer = tf.train.AdamOptimizer(learning_rate).minimize(fc['loss'])
 sess = tf.Session()
 sess.run(tf.global_variables_initializer())
 
-data_list = np.load('./datalist/ADNI_data_list.npy')
+data_list = np.load('./datalist/ADNI_train_tri.npy')
 num_data = len(data_list)
-data_train = data_list[0:num_train]
-data_test = data_list[num_train: (num_train + num_test)]
-data_val = data_list[(num_train + num_test):]
+data_train = data_list  # [0:num_train]
+# data_test = data_list[num_train: (num_train + num_test)]
+# data_val = data_list[(num_train + num_test):]
 
 hos_data_list = np.load('./datalist/301_data_list.npy')
 num_data = len(data_list)
@@ -91,9 +91,9 @@ for filename, label in hos_data_train:
         (image_data - np.nanmin(image_data)) / (np.nanmax(image_data) - np.nanmin(image_data)))
     data = image_data.reshape([-1, 79 * 95 * 79])
     hos_data.append(data)
-
+data_all = np.concatenate((data_train, hos_data_train))
 b_size = 10
-num_batches = num_train // b_size
+num_batches = len(data_all) // b_size
 if num_train % b_size != 0:
     num_batches += 1
 
@@ -103,10 +103,10 @@ for epoch_i in range(epochs):
     step = 0
     for index in range(num_batches):
         if index < num_batches - 1:
-            data_batch = data_train[b_size * step: b_size * step + b_size]
+            data_batch = data_all[b_size * step: b_size * step + b_size]
         else:
-            data_batch = data_train[b_size * step:]
-        for filename, label in np.concatenate((data_batch, hos_data_train)):
+            data_batch = data_all[b_size * step:]
+        for filename, label in data_batch:
             img = nib.load(filename)
             image_data = img.get_data()
             image_data = np.nan_to_num(
@@ -130,10 +130,10 @@ for epoch_i in range(epochs):
     step = 0
     for index in range(num_batches):
         if index < num_batches - 1:
-            data_batch = data_train[b_size * step: b_size * step + b_size]
+            data_batch = data_all[b_size * step: b_size * step + b_size]
         else:
-            data_batch = data_train[b_size * step:]
-        for filename, label in np.concatenate((data_batch, hos_data_train)):
+            data_batch = data_all[b_size * step:]
+        for filename, label in data_batch:
             img = nib.load(filename)
             image_data = img.get_data()
             image_data = np.nan_to_num(
@@ -165,10 +165,10 @@ for epoch_i in range(epochs):
     step = 0
     for index in range(num_batches):
         if index < num_batches - 1:
-            data_batch = data_train[b_size * step: b_size * step + b_size]
+            data_batch = data_all[b_size * step: b_size * step + b_size]
         else:
-            data_batch = data_train[b_size * step:]
-        for filename, label in np.concatenate((data_batch, hos_data_train)):
+            data_batch = data_all[b_size * step:]
+        for filename, label in data_batch:
             img = nib.load(filename)
             image_data = img.get_data()
             image_data = np.nan_to_num(
