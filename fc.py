@@ -132,9 +132,9 @@ np.savetxt('./result/model2/loss.txt',
 np.savetxt('./result/model2/accuracy.txt',
            accuracy_all, fmt='%.u', delimiter=",")
 
-saver = tf.train.Saver({'W_fc1': fc['W_fc1'], 'W_fc2': fc['W_fc2'], 'W_fc3': fc['W_fc3'],
-                        'b_fc1': fc['b_fc1'], 'b_fc2': fc['b_fc2'], 'b_fc3': fc['b_fc3']})
-save_path = saver.save(sess, "./train/model2/fc/fc.ckpt")
+# saver = tf.train.Saver({'W_fc1': fc['W_fc1'], 'W_fc2': fc['W_fc2'], 'W_fc3': fc['W_fc3'],
+#                         'b_fc1': fc['b_fc1'], 'b_fc2': fc['b_fc2'], 'b_fc3': fc['b_fc3']})
+# save_path = saver.save(sess, "./train/model2/fc/fc.ckpt")
 
 time2 = time.time()
 print(time2 - time1)
