@@ -43,7 +43,7 @@ learning_rate = 1e-4
 epochs = 1500
 batch_size = 1
 display_step = 100
-num_train = 234 - 23  # an  # tri
+num_train = 1800  # an  # tri
 num_test = 0
 
 
@@ -54,11 +54,12 @@ optimizer = tf.train.AdamOptimizer(learning_rate).minimize(
 sess = tf.Session()
 sess.run(tf.global_variables_initializer())
 
-data_list = np.load('./datalist/ADNI_data_list_an.npy')
+data_list = np.load('./datalist/ADNI_train_an.npy')
 num_data = len(data_list)
+print(num_data)
 data_train = data_list[0:num_train]
-data_test = data_list[num_train: (num_train + num_test)]
-data_val = data_list[(num_train + num_test):]
+data_test = np.load('./datalist/ADNI_test_an.npy')
+data_val = data_list[num_train:]
 loss_all = np.zeros(epochs)
 accuracy_all = np.zeros(epochs // 10 + 1)
 
