@@ -127,14 +127,14 @@ for epoch_i in range(epochs):
 # print("Test accuracy:", accuracy, "of", len(data_test))
 # accuracy_all[-1]=accuracy
 
-# np.savetxt('./result/model2/loss.txt',
-#            loss_all, fmt='%10.5f', delimiter=",")
-# np.savetxt('./result/model2/accuracy.txt',
-#            accuracy_all, fmt='%.u', delimiter=",")
-with open('./result/model2/loss.txt', "a+") as text_file:
-    text_file.write(loss_all + '\n')
-with open('./result/model2/accuracy.txt', "a+") as text_file:
-    text_file.write(accuracy_all + '\n')
+np.savetxt('./result/model2/loss.txt',
+           loss_all, fmt='%10.5f', delimiter=",")
+np.savetxt('./result/model2/accuracy.txt',
+           accuracy_all, fmt='%.u', delimiter=",")
+# with open('./result/model2/loss.txt', "w+") as text_file:
+#     text_file.write(str(loss_all[:]))
+# with open('./result/model2/accuracy.txt', "w+") as text_file:
+#     text_file.write(str(accuracy_all[:]))
 # saver = tf.train.Saver({'W_fc1': fc['W_fc1'], 'W_fc2': fc['W_fc2'], 'W_fc3': fc['W_fc3'],
 #                         'b_fc1': fc['b_fc1'], 'b_fc2': fc['b_fc2'], 'b_fc3': fc['b_fc3']})
 # save_path = saver.save(sess, "./train/model2/fc/fc.ckpt")
