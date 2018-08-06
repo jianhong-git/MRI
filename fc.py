@@ -58,8 +58,8 @@ data_list = np.load('./datalist/ADNI_train_an.npy')
 num_data = len(data_list)
 print(num_data)
 data_train = data_list#[0:num_train]
-data_test = np.load('./datalist/ADNI_test_an.npy')
-#data_val = data_list[num_train:]
+# data_test = np.load('./datalist/ADNI_test_an.npy')
+data_val = np.load('./datalist/ADNI_test_an.npy')
 loss_all = np.zeros(epochs)
 accuracy_all = np.zeros(epochs // 10 + 1)
 
