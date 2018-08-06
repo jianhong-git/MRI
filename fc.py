@@ -66,7 +66,7 @@ accuracy_all = np.zeros(epochs // 10 + 1)
 
 print("##########################")
 print("Traing Fully Connected Layers!")
-b_size = 16
+b_size = 10
 # print(len(data_list))
 num_batches = num_data // b_size
 if num_data % b_size != 0:
@@ -127,9 +127,9 @@ for epoch_i in range(epochs):
 # print("Test accuracy:", accuracy, "of", len(data_test))
 # accuracy_all[-1]=accuracy
 
-np.savetxt('./result/model2/fc2/loss.txt',
+np.savetxt('./result/model2/fc1/loss.txt',
            loss_all, fmt='%10.5f', delimiter=",")
-np.savetxt('./result/model2/fc2/accuracy.txt',
+np.savetxt('./result/model2/fc1/accuracy.txt',
            accuracy_all, fmt='%.u', delimiter=",")
 # with open('./result/model2/loss.txt', "w+") as text_file:
 #     text_file.write(str(loss_all[:]))
@@ -138,7 +138,7 @@ np.savetxt('./result/model2/fc2/accuracy.txt',
 
 saver = tf.train.Saver({'W_fc1': fc['W_fc1'], 'W_fc2': fc['W_fc2'], 'W_fc3': fc['W_fc3'],
                         'b_fc1': fc['b_fc1'], 'b_fc2': fc['b_fc2'], 'b_fc3': fc['b_fc3']})
-save_path = saver.save(sess, "./train/model2/fc/fc.ckpt")
+save_path = saver.save(sess, "./train/model2/fc1/fc.ckpt")
 
 time2 = time.time()
 print(time2 - time1)
