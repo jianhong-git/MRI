@@ -40,7 +40,7 @@ def fully_connected(num_pix, num_classes):
 # learning_rate = tf.train.exponential_decay(
 #     1e-3, global_step, 200, 0.5, staircase=True)
 learning_rate = 1e-4
-epochs = 1500
+epochs = 500
 batch_size = 1
 display_step = 100
 num_train = 1800  # an  # tri
@@ -49,7 +49,7 @@ num_test = 0
 
 fc = fully_connected(10 * 12 * 10 * 8, 2)
 optimizer = tf.train.AdamOptimizer(learning_rate).minimize(
-    fc['loss'])#, global_step=global_step
+    fc['loss'])  # , global_step=global_step
 
 sess = tf.Session()
 sess.run(tf.global_variables_initializer())
@@ -57,7 +57,7 @@ sess.run(tf.global_variables_initializer())
 data_list = np.load('./datalist/ADNI_train_an.npy')
 num_data = len(data_list)
 print(num_data)
-data_train = data_list#[0:num_train]
+data_train = data_list  # [0:num_train]
 # data_test = np.load('./datalist/ADNI_test_an.npy')
 data_val = np.load('./datalist/ADNI_test_an.npy')
 loss_all = np.zeros(epochs)
@@ -127,12 +127,13 @@ for epoch_i in range(epochs):
 # print("Test accuracy:", accuracy, "of", len(data_test))
 # accuracy_all[-1]=accuracy
 
-np.savetxt("./result/loss.txt", loss_all, fmt='%10.5f', delimiter=",")
-np.savetxt("./result/accuracy.txt", accuracy_all, fmt='%.u', delimiter=",")
+np.savetxt("./result/model2/loss.txt", loss_all, fmt='%10.5f', delimiter=",")
+np.savetxt("./result/model2/accuracy.txt",
+           accuracy_all, fmt='%.u', delimiter=",")
 
-# saver = tf.train.Saver({'W_fc1': fc['W_fc1'], 'W_fc2': fc['W_fc2'], 'W_fc3': fc['W_fc3'],
-#                         'b_fc1': fc['b_fc1'], 'b_fc2': fc['b_fc2'], 'b_fc3': fc['b_fc3']})
-# save_path = saver.save(sess, "./train/model2/fc/fc.ckpt")
+saver = tf.train.Saver({'W_fc1': fc['W_fc1'], 'W_fc2': fc['W_fc2'], 'W_fc3': fc['W_fc3'],
+                        'b_fc1': fc['b_fc1'], 'b_fc2': fc['b_fc2'], 'b_fc3': fc['b_fc3']})
+save_path = saver.save(sess, "./train/model2/fc/fc.ckpt")
 
 time2 = time.time()
 print(time2 - time1)
