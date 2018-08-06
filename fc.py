@@ -40,7 +40,7 @@ def fully_connected(num_pix, num_classes):
 # learning_rate = tf.train.exponential_decay(
 #     1e-3, global_step, 200, 0.5, staircase=True)
 learning_rate = 1e-4
-epochs = 1000
+epochs = 5
 batch_size = 1
 display_step = 100
 num_train = 1800  # an  # tri
@@ -127,9 +127,9 @@ for epoch_i in range(epochs):
 # print("Test accuracy:", accuracy, "of", len(data_test))
 # accuracy_all[-1]=accuracy
 
-np.savetxt('/home/jhchen/MRI/result/model2/loss.txt',
+np.savetxt('./result/model2/loss.txt',
            loss_all, fmt='%10.5f', delimiter=",")
-np.savetxt('/home/jhchen/MRI/result/model2/accuracy.txt',
+np.savetxt('./result/model2/accuracy.txt',
            accuracy_all, fmt='%.u', delimiter=",")
 
 saver = tf.train.Saver({'W_fc1': fc['W_fc1'], 'W_fc2': fc['W_fc2'], 'W_fc3': fc['W_fc3'],
