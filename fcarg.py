@@ -147,8 +147,7 @@ def main():
     #                (args.batchsize, args.epochs), loss_all, fmt='%10.5f', delimiter=",")
     text_file = open('./result/model2/fcarg/lossbatch%depoch%d.txt' %
                      (args.batchsize, args.epochs), "w+")
-    np.savetxt('lossbatch%depoch%d.txt' %
-               (args.batchsize, args.epochs), loss_all, fmt='%10.5f', delimiter=",")
+    text_file.writelines(loss_all)
     text_file.close()
 
     # saver = tf.train.Saver({'W_fc1': fc['W_fc1'], 'W_fc2': fc['W_fc2'], 'W_fc3': fc['W_fc3'],
