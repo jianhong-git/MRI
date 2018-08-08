@@ -143,7 +143,7 @@ def main():
     #            (args.batchsize, args.epochs), loss_all, fmt='%10.5f', delimiter=",")
     with open('./result/model2/fcarg/lossbatch%depoch%d.txt' %
               (args.batchsize, args.epochs), "w+") as text_file:
-        np.savetxt('lossbatch%depoch%d.txt' %
+        np.savetxt('./result/model2/fcarg/lossbatch%depoch%d.txt' %
                    (args.batchsize, args.epochs), loss_all, fmt='%10.5f', delimiter=",")
 
     # text_file = open('./result/model2/fcarg/lossbatch%depoch%d.txt' %
