@@ -8,7 +8,7 @@ for i in {0..10..2}
 
 
 for power in $(seq 2 6)
-batchsize=2**$power
-do
-    echo '$batchsize'
-done
+    batchsize=2**$power
+    do
+        echo '$batchsize'
+    done
