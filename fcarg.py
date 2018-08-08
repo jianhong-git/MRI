@@ -7,7 +7,7 @@ import os
 import time
 import argparse
 time1 = time.time()
-os.environ["CUDA_VISIBLE_DEVICES"] = "0"
+os.environ["CUDA_VISIBLE_DEVICES"] = "2"
 
 
 def parse_args():
