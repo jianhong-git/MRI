@@ -135,12 +135,16 @@ def main():
             # loss_all[(epoch_i + 1) // 10 - 1] = loss
             accuracy_all[(epoch_i + 1) // 10 - 1] = accuracy
 
-    np.savetxt('./result/model2/fcarg/lossbatch%depoch%d.txt' %
+    # np.savetxt('./result/model2/fcarg/lossbatch%depoch%d.txt' %
+    #            (args.batchsize, args.epochs), loss_all, fmt='%10.5f', delimiter=",")
+    # np.savetxt('./result/model2/fcarg/accuracy%depoch%d.txt' %
+    #            (args.batchsize, args.epochs), accuracy_all, fmt='%.u', delimiter=",")
+    np.savetxt('lossbatch%depoch%d.txt' %
                (args.batchsize, args.epochs), loss_all, fmt='%10.5f', delimiter=",")
-    np.savetxt('./result/model2/fcarg/accuracy%depoch%d.txt' %
-               (args.batchsize, args.epochs), accuracy_all, fmt='%.u', delimiter=",")
-    # with open('./result/model2/loss.txt', "w+") as text_file:
-    #     text_file.write(str(loss_all[:]))
+    with open('./result/model2/fcarg/lossbatch%depoch%d.txt' %
+              (args.batchsize, args.epochs), "w+") as text_file:
+        np.savetxt('lossbatch%depoch%d.txt' %
+                   (args.batchsize, args.epochs), loss_all, fmt='%10.5f', delimiter=",")
     # with open('./result/model2/accuracy.txt', "w+") as text_file:
     #     text_file.write(str(accuracy_all[:]))
 
