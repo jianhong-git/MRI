@@ -25,24 +25,27 @@ def parse_args():
                         help='Adam weight_decay (default: 1e-4)')
     parser.add_argument('--seed', type=int, default=1, metavar='S',
                         help='random seed (default: 1)')
-
+    parser.add_argument('--fc1', type=int, default=500, metavar='S',
+                        help='length for the first fully connected layer (default: 500)')
+    parser.add_argument('--fc2', type=int, default=100, metavar='S',
+                        help='length for the second fully connected layer (default: 100)')
     args = parser.parse_args()
     return args
 
 
-def fully_connected(num_pix, num_classes):
+def fully_connected(num_pix, num_classes, fc1, fc2):
     x = tf.placeholder(tf.float32, [None, num_pix], name='fc_input')
     labels = tf.placeholder(tf.int64, shape=[None])
     W_fc1 = tf.Variable(tf.truncated_normal(
-        [num_pix, 500], stddev=0.1), name='fc1_weights')
+        [num_pix, fc1], stddev=0.1), name='fc1_weights')
     b_fc1 = tf.Variable(tf.truncated_normal(
-        [500], stddev=0.1), name='fc1_biases')
+        [fc1], stddev=0.1), name='fc1_biases')
     W_fc2 = tf.Variable(tf.truncated_normal(
-        [500, 100], stddev=0.1), name='fc2_weights')
+        [fc1, fc2], stddev=0.1), name='fc2_weights')
     b_fc2 = tf.Variable(tf.truncated_normal(
-        [100], stddev=0.1), name='fc2_biases')
+        [fc2], stddev=0.1), name='fc2_biases')
     W_fc3 = tf.Variable(tf.truncated_normal(
-        [100, num_classes], stddev=0.1), name='fc3_weights')
+        [fc2, num_classes], stddev=0.1), name='fc3_weights')
     b_fc3 = tf.Variable(tf.truncated_normal(
         [num_classes], stddev=0.1), name='fc3_biases')
     h_fc1 = tf.nn.relu(tf.matmul(x, W_fc1) + b_fc1)
@@ -69,7 +72,7 @@ def main():
     # num_train = 1800  # an  # tri
     # num_test = 0
 
-    fc = fully_connected(10 * 12 * 10 * 8, 2)
+    fc = fully_connected(10 * 12 * 10 * 8, 2, args.fc1, args.fc2)
     optimizer = tf.train.AdamOptimizer(learning_rate).minimize(
         fc['loss'])  # , global_step=global_step
 

@@ -1,11 +1,17 @@
 #!/bin/bash
 #!/home/jhchen/anaconda3/bin/python3
-
-for batchsize in 10 16 20 32 64
+for fc1 in {200..600..100}
 do
-    for epochs in 500 1000
+    for fc2 in {20..120..20}
     do
-        echo "CUDA_VISIBLE_DEVICES=2,3 /bin/python3 fcarg.py --batchsize=${batchsize} --epochs=${epochs} "
-        CUDA_VISIBLE_DEVICES=2,3 /bin/python3 fcarg.py --batchsize=${batchsize} --epochs=${epochs}
+
+        for batchsize in 10 16 20 32 64
+        do
+            for epochs in 500 1000
+            do
+                echo "CUDA_VISIBLE_DEVICES=2,3 /bin/python3 fcarg.py --fc1=${fc1} --fc2=${fc2} --batchsize=${batchsize} --epochs=${epochs} "
+                CUDA_VISIBLE_DEVICES=2,3 /bin/python3 fcarg.py --fc1=${fc1} --fc2=${fc2} --batchsize=${batchsize} --epochs=${epochs}
+            done
+        done
     done
 done
