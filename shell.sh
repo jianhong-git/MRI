@@ -1,6 +1,6 @@
 #!/bin/bash
 #!/home/jhchen/anaconda3/bin/python3
-for fc1 in {200..600..100}
+for fc1 in {100..600..100}
 do
     for fc2 in {20..120..20}
     do
