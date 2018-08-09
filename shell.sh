@@ -9,8 +9,8 @@ do
         do
             for epochs in 500 #1000
             do
-                echo "CUDA_VISIBLE_DEVICES=2,3 /bin/python3 fcarg.py --fc1=${fc1} --fc2=${fc2} --batchsize=${batchsize} --epochs=${epochs} "
-                CUDA_VISIBLE_DEVICES=2,3 /bin/python3 fcarg.py --fc1=${fc1} --fc2=${fc2} --batchsize=${batchsize} --epochs=${epochs}
+                echo "CUDA_VISIBLE_DEVICES=1,3 /bin/python3 fcarg.py --fc1=${fc1} --fc2=${fc2} --batchsize=${batchsize} --epochs=${epochs} "
+                CUDA_VISIBLE_DEVICES=1,3 /bin/python3 fcarg.py --fc1=${fc1} --fc2=${fc2} --batchsize=${batchsize} --epochs=${epochs}
             done
         done
     done
