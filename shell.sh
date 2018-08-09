@@ -7,7 +7,7 @@ do
 
         for batchsize in 4 #10 16 20 32 64
         do
-            for epochs in 500 #1000
+            for epochs in 10 #500 #1000
             do
                 echo "CUDA_VISIBLE_DEVICES=1,3 /bin/python3 fcarg.py --fc1=${fc1} --fc2=${fc2} --batchsize=${batchsize} --epochs=${epochs} "
                 CUDA_VISIBLE_DEVICES=1,3 /bin/python3 fcarg.py --fc1=${fc1} --fc2=${fc2} --batchsize=${batchsize} --epochs=${epochs}
