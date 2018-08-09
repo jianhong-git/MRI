@@ -143,18 +143,19 @@ def main():
     # np.savetxt('./result/model2/fcarg/accuracy%depoch%d.txt' %
     #            (args.batchsize, args.epochs), accuracy_all, fmt='%.u', delimiter=",")
 
-    with open('./result/model2/fcarg/accuracybatch%depoch%d.txt' %
-              (args.batchsize, args.epochs), "w+") as text_file1:
-        np.savetxt('./result/model2/fcarg/accuracybatch%depoch%d.txt' %
-                   (args.batchsize, args.epochs), accuracy_all, fmt='%.u', delimiter=",")
-    with open('./result/model2/fcarg/lossbatch%depoch%d.txt' %
-              (args.batchsize, args.epochs), "w+") as text_file2:
-        np.savetxt('./result/model2/fcarg/lossbatch%depoch%d.txt' %
-                   (args.batchsize, args.epochs), loss_all, fmt='%10.5f', delimiter=",")
+    with open('./result/model2/fcarg/accuracyfc%dfc%dbatch%depoch%d.txt' %
+              (args.fc1, args.fc2, args.batchsize, args.epochs), "w+") as text_file1:
+        np.savetxt('./result/model2/fcarg/accuracyfc%dfc%dbatch%depoch%d.txt' %
+                   (args.fc1, args.fc2, args.batchsize, args.epochs), accuracy_all, fmt='%.u', delimiter=",")
+    with open('./result/model2/fcarg/lossfc%dfc%dbatch%depoch%d.txt' %
+              (args.fc1, args.fc2, args.batchsize, args.epochs), "w+") as text_file2:
+        np.savetxt('./result/model2/fcarg/lossfc%dfc%dbatch%depoch%d.txt' %
+                   (args.fc1, args.fc2, args.batchsize, args.epochs), loss_all, fmt='%10.5f', delimiter=",")
 
-    # saver = tf.train.Saver({'W_fc1': fc['W_fc1'], 'W_fc2': fc['W_fc2'], 'W_fc3': fc['W_fc3'],
-    #                         'b_fc1': fc['b_fc1'], 'b_fc2': fc['b_fc2'], 'b_fc3': fc['b_fc3']})
-    # save_path = saver.save(sess, "./train/model2/fc3/fc.ckpt")
+    saver = tf.train.Saver({'W_fc1': fc['W_fc1'], 'W_fc2': fc['W_fc2'], 'W_fc3': fc['W_fc3'],
+                            'b_fc1': fc['b_fc1'], 'b_fc2': fc['b_fc2'], 'b_fc3': fc['b_fc3']})
+    save_path = saver.save(sess, "./train/model2/fc3/fc-fc%dfc%dbatch%depoch%d.ckpt" %
+                           (args.fc1, args.fc2, args.batchsize, args.epochs))
     time2 = time.time()
     print(time2 - time1)
 
