@@ -211,13 +211,13 @@ for t in range(5 * 10**2):  # 10**5
 # torch.save(model.state_dict(), 'ANN5w.pt')
 '''write y_pred y_test'''
 # csvfile = open('p_value.csv','a+',newline ='')
-csvfile = open('p_value_4hidden.csv', 'a+')
-writer = csv.writer(csvfile, delimiter=',')
-# writer.writerow([t+1,loss.data[0]/int(p*m),1-(loss.data[0]/den),loss_test.data[0]/(m-int(p*m)),1-(loss_test.data[0]/den_test),time2 - time1])
-writer.writerow(np.concatenate((np.array(['label']), y_test.cpu().numpy()), 0))
-writer.writerow(np.concatenate(
-    (np.array(['prediction']), y_best_pred.cpu().data.squeeze().numpy()), 0))
-csvfile.close()
+# csvfile = open('p_value_4hidden.csv', 'a+')
+# writer = csv.writer(csvfile, delimiter=',')
+# # writer.writerow([t+1,loss.data[0]/int(p*m),1-(loss.data[0]/den),loss_test.data[0]/(m-int(p*m)),1-(loss_test.data[0]/den_test),time2 - time1])
+# writer.writerow(np.concatenate((np.array(['label']), y_test.cpu().numpy()), 0))
+# writer.writerow(np.concatenate(
+#     (np.array(['prediction']), y_best_pred.cpu().data.squeeze().numpy()), 0))
+# csvfile.close()
 csvfile = open(R2, 'a+', newline='')
 writer = csv.writer(csvfile, delimiter=',')
 writer.writerow(R2)
