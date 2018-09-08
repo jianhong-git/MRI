@@ -62,15 +62,15 @@ model = torch.nn.Sequential(
     torch.nn.ReLU(),
     torch.nn.Dropout(p=t, inplace=False),
 
-    # torch.nn.Linear(H,H),
-    # torch.nn.BatchNorm1d(H),
-    # torch.nn.ReLU(),
-    # torch.nn.Dropout(p= t, inplace=False),
+    torch.nn.Linear(H, H),
+    torch.nn.BatchNorm1d(H),
+    torch.nn.ReLU(),
+    torch.nn.Dropout(p=t, inplace=False),
 
-    # torch.nn.Linear(H, H),
-    # torch.nn.BatchNorm1d(H),
-    # torch.nn.ReLU(),
-    # torch.nn.Dropout(p= t, inplace=False),
+    torch.nn.Linear(H, H),
+    torch.nn.BatchNorm1d(H),
+    torch.nn.ReLU(),
+    torch.nn.Dropout(p=t, inplace=False),
 
     # torch.nn.Linear(H, H),
     # torch.nn.BatchNorm1d(H),
