@@ -13,10 +13,11 @@ import matplotlib.pyplot as plt
 #import math
 import torch
 from torch.autograd import Variable
-os.environ["CUDA_VISIBLE_DEVICES"] = "0"
+
 
 import time
 import os
+os.environ["CUDA_VISIBLE_DEVICES"] = "0"
 time1 = time.time()
 dirname, filename = os.path.split(os.path.abspath(__file__))
 
