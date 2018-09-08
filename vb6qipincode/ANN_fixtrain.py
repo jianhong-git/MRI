@@ -17,6 +17,8 @@ from torch.autograd import Variable
 
 import time
 import os
+os.environ["CUDA_VISIBLE_DEVICES"] = "0"
+
 time1 = time.time()
 dirname, filename = os.path.split(os.path.abspath(__file__))
 
@@ -151,7 +153,9 @@ R2_besttrain = 0
 y_best_pred = 0.0
 k = 0
 p = 0.9
-for t in range(5 * 10**5):  # 10**5
+R2 = np.zeros(5 * 10**5)
+Loss = np.zeros(5 * 10**5)
+for t in range(5 * 10**2):  # 10**5
     # Forward pass: compute predicted y by passing x to the model.
     y_pred = model(Variable(x))
     loss = loss_fn(y_pred.view(-1), Variable(y))
@@ -160,6 +164,8 @@ for t in range(5 * 10**5):  # 10**5
         y_pred = model(Variable(x_test))
         # Compute and print loss.
         loss_test = loss_fn(y_pred.view(-1), Variable(y_test))
+        R2[t] = 1 - (loss_test.data[0].cpu() / den_test)
+        Loss[t] = loss_test.data[0].cpu() / (m - int(p * m))
         if R2_besttest > 1 - (loss_test.data[0] / den_test):
             pass
         else:
@@ -170,8 +176,9 @@ for t in range(5 * 10**5):  # 10**5
 
         time2 = time.time()
     if (t + 1) % 100 == 0:
-        print('training loss in iter ', t + 1, ': ', loss.data[0] / int(p * m))
-        print ('R^2 : ', 1 - (loss.data[0] / den))
+        print('training loss in iter ', t + 1,
+              ': ', loss.data[0].cpu() / int(p * m))
+        print ('R^2 : ', 1 - (loss.data[0].cpu() / den))
         print ('test loss=', loss_test.data[0] / (m - int(p * m)))
         print ('test R^2 : ', 1 - (loss_test.data[0] / den_test))
         print ('best step', k)
