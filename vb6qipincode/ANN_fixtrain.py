@@ -219,7 +219,10 @@ for t in range(5 * 10**2):  # 10**5
 #     (np.array(['prediction']), y_best_pred.cpu().data.squeeze().numpy()), 0))
 # csvfile.close()
 with open("R2.txt", "a+") as text_file:
-    text_file.write(R2)
+    text_file.write(str(R2))
+text_file.close()
+with open("R2list.txt", "a+") as text_file:
+    text_file.write(list(R2))
 text_file.close()
 # csvfile = open('Loss.csv', 'a+', newline='')
 # writer = csv.writer(csvfile, delimiter=',')
