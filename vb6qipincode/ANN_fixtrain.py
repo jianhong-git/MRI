@@ -164,8 +164,8 @@ for t in range(5 * 10**2):  # 10**5
         y_pred = model(Variable(x_test))
         # Compute and print loss.
         loss_test = loss_fn(y_pred.view(-1), Variable(y_test))
-        R2[t] = 1 - (loss_test.data[0] / den_test)
-        Loss[t] = loss_test.data[0] / (m - int(p * m))
+        R2[t] = (1 - (loss_test.data[0] / den_test)).cpu().numpy()
+        Loss[t] = (loss_test.data[0] / (m - int(p * m))).cpu().numpy()
         if R2_besttest > 1 - (loss_test.data[0] / den_test):
             pass
         else:
@@ -191,7 +191,7 @@ for t in range(5 * 10**2):  # 10**5
 
     optimizer.step()
 
-print(y_test.numpy().size, y_best_pred.cpu().data.squeeze().numpy().size)
+# print(y_test.numpy().size, y_best_pred.cpu().data.squeeze().numpy().size)
 # plt.plot(y_test.numpy(), y_best_pred.data.squeeze().numpy()-y_test.numpy(),'ro')
 '''plot function'''
 # plt.plot(y_test.cpu().numpy(),y_best_pred.cpu().data.squeeze().numpy() - y_test.cpu().numpy(),'ro')
