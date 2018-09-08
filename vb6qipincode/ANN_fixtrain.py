@@ -179,8 +179,10 @@ for t in range(5 * 10**5):  # 10**5
         print('training loss in iter ', t + 1,
               ': ', loss.data[0].cpu().numpy() / int(p * m))
         print ('R^2 : ', (1 - (loss.data[0] / den)).cpu().numpy())
-        print ('test loss=', loss_test.data[0] / (m - int(p * m)))
-        print ('test R^2 : ', 1 - (loss_test.data[0] / den_test))
+        print ('test loss=',
+               (loss_test.data[0] / (m - int(p * m))).cpu().numpy())
+        print ('test R^2 : ',
+               (1 - (loss_test.data[0] / den_test)).cpu().numpy())
         print ('best step', k)
         print ('best test R^2', R2_besttest)
         print ('best train R^2', R2_besttrain)
