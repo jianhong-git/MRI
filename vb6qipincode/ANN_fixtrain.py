@@ -178,7 +178,7 @@ for t in range(5 * 10**2):  # 10**5
     if (t + 1) % 100 == 0:
         print('training loss in iter ', t + 1,
               ': ', loss.data[0].cpu().numpy() / int(p * m))
-        print ('R^2 : ', 1 - (loss.data[0] / den))
+        print ('R^2 : ', (1 - (loss.data[0] / den)).cpu().numpy())
         print ('test loss=', loss_test.data[0] / (m - int(p * m)))
         print ('test R^2 : ', 1 - (loss_test.data[0] / den_test))
         print ('best step', k)
@@ -191,7 +191,7 @@ for t in range(5 * 10**2):  # 10**5
 
     optimizer.step()
 
-print(y_test.cpu().numpy().size, y_best_pred.cpu().data.squeeze().numpy().size)
+print(y_test.numpy().size, y_best_pred.cpu().data.squeeze().numpy().size)
 # plt.plot(y_test.numpy(), y_best_pred.data.squeeze().numpy()-y_test.numpy(),'ro')
 '''plot function'''
 # plt.plot(y_test.cpu().numpy(),y_best_pred.cpu().data.squeeze().numpy() - y_test.cpu().numpy(),'ro')
