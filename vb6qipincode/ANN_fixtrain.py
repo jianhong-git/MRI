@@ -153,9 +153,9 @@ R2_besttrain = 0
 y_best_pred = 0.0
 k = 0
 p = 0.9
-R2 = np.zeros(5 * 10**4)
-Loss = np.zeros(5 * 10**4)
-for t in range(5 * 10**4):  # 10**5
+R2 = np.zeros(5 * 10**5)
+Loss = np.zeros(5 * 10**5)
+for t in range(5 * 10**5):  # 10**5
     # Forward pass: compute predicted y by passing x to the model.
     y_pred = model(Variable(x))
     loss = loss_fn(y_pred.view(-1), Variable(y))
