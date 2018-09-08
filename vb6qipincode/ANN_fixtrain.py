@@ -164,8 +164,8 @@ for t in range(5 * 10**2):  # 10**5
         y_pred = model(Variable(x_test))
         # Compute and print loss.
         loss_test = loss_fn(y_pred.view(-1), Variable(y_test))
-        R2[t] = 1 - (loss_test.data[0].cpu() / den_test)
-        Loss[t] = loss_test.data[0].cpu() / (m - int(p * m))
+        R2[t] = 1 - (loss_test.data[0] / den_test)
+        Loss[t] = loss_test.data[0] / (m - int(p * m))
         if R2_besttest > 1 - (loss_test.data[0] / den_test):
             pass
         else:
@@ -177,8 +177,8 @@ for t in range(5 * 10**2):  # 10**5
         time2 = time.time()
     if (t + 1) % 100 == 0:
         print('training loss in iter ', t + 1,
-              ': ', loss.data[0].cpu() / int(p * m))
-        print ('R^2 : ', 1 - (loss.data[0].cpu() / den))
+              ': ', loss.data[0] / int(p * m))
+        print ('R^2 : ', 1 - (loss.data[0] / den))
         print ('test loss=', loss_test.data[0] / (m - int(p * m)))
         print ('test R^2 : ', 1 - (loss_test.data[0] / den_test))
         print ('best step', k)
