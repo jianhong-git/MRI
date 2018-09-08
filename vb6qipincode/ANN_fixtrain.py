@@ -177,7 +177,7 @@ for t in range(5 * 10**2):  # 10**5
         time2 = time.time()
     if (t + 1) % 100 == 0:
         print('training loss in iter ', t + 1,
-              ': ', loss.data[0] / int(p * m))
+              ': ', loss.data[0].cpu() / int(p * m))
         print ('R^2 : ', 1 - (loss.data[0] / den))
         print ('test loss=', loss_test.data[0] / (m - int(p * m)))
         print ('test R^2 : ', 1 - (loss_test.data[0] / den_test))
@@ -191,7 +191,7 @@ for t in range(5 * 10**2):  # 10**5
 
     optimizer.step()
 
-print(y_test.cpu().numpy().size, y_best_pred.cpu().data.squeeze().numpy().size)
+print(y_test.numpy().size, y_best_pred.data.squeeze().numpy().size)
 # plt.plot(y_test.numpy(), y_best_pred.data.squeeze().numpy()-y_test.numpy(),'ro')
 '''plot function'''
 # plt.plot(y_test.cpu().numpy(),y_best_pred.cpu().data.squeeze().numpy() - y_test.cpu().numpy(),'ro')
@@ -217,4 +217,12 @@ writer = csv.writer(csvfile, delimiter=',')
 writer.writerow(np.concatenate((np.array(['label']), y_test.cpu().numpy()), 0))
 writer.writerow(np.concatenate(
     (np.array(['prediction']), y_best_pred.cpu().data.squeeze().numpy()), 0))
+csvfile.close()
+csvfile = open(R2, 'a+', newline='')
+writer = csv.writer(csvfile, delimiter=',')
+writer.writerow(R2)
+csvfile.close()
+csvfile = open(Loss, 'a+', newline='')
+writer = csv.writer(csvfile, delimiter=',')
+writer.writerow(Loss)
 csvfile.close()
