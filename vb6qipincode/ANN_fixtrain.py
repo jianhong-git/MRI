@@ -17,7 +17,7 @@ from torch.autograd import Variable
 
 import time
 import os
-os.environ["CUDA_VISIBLE_DEVICES"] = "0"
+# os.environ["CUDA_VISIBLE_DEVICES"] = "0"
 
 time1 = time.time()
 dirname, filename = os.path.split(os.path.abspath(__file__))
@@ -169,8 +169,8 @@ for t in range(5 * 10**5):  # 10**5
         if R2_besttest > 1 - (loss_test.data[0] / den_test):
             pass
         else:
-            R2_besttest = 1 - (loss_test.data[0] / den_test)
-            R2_besttrain = 1 - (loss.data[0] / den)
+            R2_besttest = (1 - (loss_test.data[0] / den_test)).cpu().numpy()
+            R2_besttrain = (1 - (loss.data[0] / den)).cpu().numpy()
             y_best_pred = y_pred
             k = t + 1
 
