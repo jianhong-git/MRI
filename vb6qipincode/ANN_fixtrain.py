@@ -155,7 +155,7 @@ k = 0
 p = 0.9
 R2 = np.zeros((5 * 10**4, 1))
 Loss = np.zeros((5 * 10**4, 1))
-for t in range(5 * 10**2):  # 10**5
+for t in range(5 * 10**4):  # 10**5
     # Forward pass: compute predicted y by passing x to the model.
     y_pred = model(Variable(x))
     loss = loss_fn(y_pred.view(-1), Variable(y))
@@ -218,10 +218,11 @@ for t in range(5 * 10**2):  # 10**5
 # writer.writerow(np.concatenate(
 #     (np.array(['prediction']), y_best_pred.cpu().data.squeeze().numpy()), 0))
 # csvfile.close()
-with open("R2.txt", "a+") as text_file:
-    text_file.write(str(R2))
-text_file.close()
-# csvfile = open('Loss.csv', 'a+', newline='')
-# writer = csv.writer(csvfile, delimiter=',')
-# writer.writerow(Loss)
-# csvfile.close()
+csvfile = open('R2.csv', 'a+', newline='')
+writer = csv.writer(csvfile, delimiter=',')
+writer.writerow(R2)
+csvfile.close()
+csvfile = open('Loss.csv', 'a+', newline='')
+writer = csv.writer(csvfile, delimiter=',')
+writer.writerow(Loss)
+csvfile.close()
