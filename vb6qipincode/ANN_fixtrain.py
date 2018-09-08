@@ -17,7 +17,7 @@ from torch.autograd import Variable
 
 import time
 import os
-# os.environ["CUDA_VISIBLE_DEVICES"] = "0"
+os.environ["CUDA_VISIBLE_DEVICES"] = "0,2,3"
 
 time1 = time.time()
 dirname, filename = os.path.split(os.path.abspath(__file__))
