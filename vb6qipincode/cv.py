@@ -17,7 +17,7 @@ from torch.autograd import Variable
 
 import time
 import os
-# os.environ["CUDA_VISIBLE_DEVICES"] = "3"
+os.environ["CUDA_VISIBLE_DEVICES"] = "0"
 
 time1 = time.time()
 dirname, filename = os.path.split(os.path.abspath(__file__))
@@ -93,9 +93,9 @@ def main():
     y_best_pred = 0.0
     k = 0
     p = 0.8
-    R2 = np.zeros(5 * 10**3)
-    Loss = np.zeros(5 * 10**3)
-    for t in range(5 * 10**3):  # 10**5
+    R2 = np.zeros(5 * 10**5)
+    Loss = np.zeros(5 * 10**5)
+    for t in range(5 * 10**5):  # 10**5
         # Forward pass: compute predicted y by passing x to the model.
         y_pred = model(Variable(x))
         loss = loss_fn(y_pred.view(-1), Variable(y))
@@ -170,7 +170,7 @@ if __name__ == '__main__':
         y_test = torch.from_numpy(b_test).float().cuda()
 
         R2_bestval = 0
-        while R2_bestval < 0.2:
+        while R2_bestval < 0.4:
             R2, Loss, R2_bestval, R2_test = main()
         # with open("./accuracy/1316-all13.txt", "a+") as text_file:
         #     text_file.write(str(epochs) + ' ' + str(run) + ' preg_train ' + 'accu_train ' + 'preg_test ' + 'accu_test ' + '0 ' + '/ ' + 'num_pre ' + 'TPR ' + 'FPR ' + 'AUC '
