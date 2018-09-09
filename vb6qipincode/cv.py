@@ -93,9 +93,9 @@ def main():
     y_best_pred = 0.0
     k = 0
     p = 0.8
-    R2 = np.zeros(5 * 10**2)
-    Loss = np.zeros(5 * 10**2)
-    for t in range(5 * 10**2):  # 10**5
+    R2 = np.zeros(5 * 10**3)
+    Loss = np.zeros(5 * 10**3)
+    for t in range(5 * 10**3):  # 10**5
         # Forward pass: compute predicted y by passing x to the model.
         y_pred = model(Variable(x))
         loss = loss_fn(y_pred.view(-1), Variable(y))
