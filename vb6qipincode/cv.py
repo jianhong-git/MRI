@@ -170,7 +170,7 @@ if __name__ == '__main__':
         y_test = torch.from_numpy(b_test).float().cuda()
 
         R2_bestval = 0
-        while R2_bestval < 0.4:
+        while R2_bestval < 0.2:
             R2, Loss, R2_bestval, R2_test = main()
         # with open("./accuracy/1316-all13.txt", "a+") as text_file:
         #     text_file.write(str(epochs) + ' ' + str(run) + ' preg_train ' + 'accu_train ' + 'preg_test ' + 'accu_test ' + '0 ' + '/ ' + 'num_pre ' + 'TPR ' + 'FPR ' + 'AUC '
