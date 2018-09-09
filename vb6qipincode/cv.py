@@ -44,7 +44,6 @@ def split(i):  # i-th fold
 
 def main():
 
-    D_in, H, D_out = p - 3, 30, 1
     t = 0.5  # dropout
     # Use the nn package to define our model and loss function.
     model = torch.nn.Sequential(
@@ -136,6 +135,7 @@ if __name__ == '__main__':
     df = np.genfromtxt('data_with_training_information.csv', delimiter=',')
     m, p = df.shape
     df = df[~np.isnan(df).any(1)][:m // 10 * 10, :]
+    D_in, H, D_out = p - 3, 30, 1
 
     fsize = m // 10
     idx = np.arange(fsize * 10)
