@@ -115,7 +115,7 @@ def main():
             time2 = time.time()
         if (t + 1) % 100 == 0:
             print('training loss in iter ', t + 1,
-                  ': ', loss.data[0].cpu().numpy() / int(p * m))
+                  ': ', loss.data[0] / int(p * m))
             print ('R^2 : ', (1 - (loss.data[0] / den)))
             print ('test loss=',
                    (loss_test.data[0] / (m - int(p * m))))
