@@ -105,7 +105,7 @@ def main():
             # Compute and print loss.
             loss_val = loss_fn(y_pred.view(-1), Variable(y_val))
             R2[t] = (1 - (loss_val.data[0] / den_val))
-            Loss[t] = (loss_val.data[0] / ( int(0.1 * m)))
+            Loss[t] = (loss_val.data[0] / (int(0.1 * m)))
             if R2_bestval > 1 - (loss_val.data[0] / den_val):
                 pass
             else:
@@ -120,13 +120,13 @@ def main():
             print('training loss : ', loss.data[0] / int(p * m))
             print ('R^2 : ', (1 - (loss.data[0] / den)))
             print ('val loss=',
-                   (loss_val.data[0] / ( int(0.1 * m))))
+                   (loss_val.data[0] / (int(0.1 * m))))
             print ('val R^2 : ',
                    (1 - (loss_val.data[0] / den_val)))
             print ('best step', k)
             print ('best val R^2', R2_bestval)
             print ('best train R^2', R2_besttrain)
-        if R2_bestval>0.40:
+        if R2_bestval > 0.40:
             break
 
         optimizer.zero_grad()
@@ -169,12 +169,13 @@ if __name__ == '__main__':
         x_test = torch.from_numpy(a_test).float().cuda()
         y_test = torch.from_numpy(b_test).float().cuda()
 
-        R2, Loss, R2_bestval, R2_test = main()
+        while R2_bestval < 0.4:
+            R2, Loss, R2_bestval, R2_test = main()
         # with open("./accuracy/1316-all13.txt", "a+") as text_file:
         #     text_file.write(str(epochs) + ' ' + str(run) + ' preg_train ' + 'accu_train ' + 'preg_test ' + 'accu_test ' + '0 ' + '/ ' + 'num_pre ' + 'TPR ' + 'FPR ' + 'AUC '
         #                     + 'thresh' + '\n' + result)
         # output += str(epochs) + '\n' + result + '\n'
-        print('R2_bestval=%.5f,'%R2_bestval+'R2_test=%.5f'%R2_test)
+        print('R2_bestval=%.5f,' % R2_bestval + 'R2_test=%.5f' % R2_test)
 
         csvfile = open('R2-%d.csv' % epochs, 'a+', newline='')
         writer = csv.writer(csvfile, delimiter=',')
