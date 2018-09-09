@@ -77,19 +77,22 @@ def main():
         torch.nn.Linear(H, D_out),
     ).cuda()
     model = torch.nn.DataParallel(model).cuda()
+
     # model.load_state_dict(torch.load('ANN5w.pt'))
     loss_fn = torch.nn.MSELoss(size_average=False)
     den = sum((y - y.mean())**2)
+    den_val = sum((y_val - y_val.mean())**2)
     den_test = sum((y_test - y_test.mean())**2)
 
     learning_rate = 1e-3  # 1e-4
     optimizer = torch.optim.Adam(
         model.parameters(), lr=learning_rate, weight_decay=1)
     R2_besttest = 0
+    R2_bestval = 0
     R2_besttrain = 0
     y_best_pred = 0.0
     k = 0
-    p = 0.9
+    p = 0.8
     R2 = np.zeros(5 * 10**2)
     Loss = np.zeros(5 * 10**2)
     for t in range(5 * 10**2):  # 10**5
@@ -98,37 +101,43 @@ def main():
         loss = loss_fn(y_pred.view(-1), Variable(y))
         if (t + 1) % 1 == 0:
             # Compute and print loss.
-            y_pred = model(Variable(x_test))
+            y_pred = model(Variable(x_val))
             # Compute and print loss.
-            loss_test = loss_fn(y_pred.view(-1), Variable(y_test))
-            R2[t] = (1 - (loss_test.data[0] / den_test))
-            Loss[t] = (loss_test.data[0] / (m - int(p * m)))
-            if R2_besttest > 1 - (loss_test.data[0] / den_test):
+            loss_val = loss_fn(y_pred.view(-1), Variable(y_val))
+            R2[t] = (1 - (loss_val.data[0] / den_val))
+            Loss[t] = (loss_val.data[0] / ( int(0.1 * m)))
+            if R2_bestval > 1 - (loss_val.data[0] / den_val):
                 pass
             else:
-                R2_besttest = (
-                    1 - (loss_test.data[0] / den_test))
+                R2_bestval = (1 - (loss_val.data[0] / den_val))
                 R2_besttrain = (1 - (loss.data[0] / den))
                 y_best_pred = y_pred
                 k = t + 1
 
             time2 = time.time()
         if (t + 1) % 100 == 0:
-            print('training loss in iter ', t + 1,
-                  ': ', loss.data[0] / int(p * m))
+            print('training iter ', t + 1)
+            print('training loss : ', loss.data[0] / int(p * m))
             print ('R^2 : ', (1 - (loss.data[0] / den)))
-            print ('test loss=',
-                   (loss_test.data[0] / (m - int(p * m))))
-            print ('test R^2 : ',
-                   (1 - (loss_test.data[0] / den_test)))
+            print ('val loss=',
+                   (loss_val.data[0] / ( int(0.1 * m))))
+            print ('val R^2 : ',
+                   (1 - (loss_val.data[0] / den_val)))
             print ('best step', k)
-            print ('best test R^2', R2_besttest)
+            print ('best val R^2', R2_bestval)
             print ('best train R^2', R2_besttrain)
+        if R2_bestval>0.40:
+            break
 
         optimizer.zero_grad()
         loss.backward()
         optimizer.step()
-    return R2, Loss, R2_besttest
+
+    y_pred = model(Variable(x_test))
+    # Compute and print loss.
+    loss_test = loss_fn(y_pred.view(-1), Variable(y_test))
+    R2_besttest = (1 - (loss_test.data[0] / den_test))
+    return R2, Loss, R2_bestval, R2_besttest
 
 
 if __name__ == '__main__':
@@ -160,12 +169,12 @@ if __name__ == '__main__':
         x_test = torch.from_numpy(a_test).float().cuda()
         y_test = torch.from_numpy(b_test).float().cuda()
 
-        R2, Loss, R2_besttest = main()
+        R2, Loss, R2_bestval, R2_test = main()
         # with open("./accuracy/1316-all13.txt", "a+") as text_file:
         #     text_file.write(str(epochs) + ' ' + str(run) + ' preg_train ' + 'accu_train ' + 'preg_test ' + 'accu_test ' + '0 ' + '/ ' + 'num_pre ' + 'TPR ' + 'FPR ' + 'AUC '
         #                     + 'thresh' + '\n' + result)
         # output += str(epochs) + '\n' + result + '\n'
-        print(R2_besttest)
+        print('R2_bestval=%.5f,'%R2_bestval+'R2_test=%.5f'%R2_test)
 
         csvfile = open('R2-%d.csv' % epochs, 'a+', newline='')
         writer = csv.writer(csvfile, delimiter=',')
