@@ -2,15 +2,15 @@
 import csv
 import numpy as np
 from numpy import array, cov, corrcoef, mean
-#import pandas as pd
+# import pandas as pd
 from sklearn import metrics
 from sklearn import preprocessing
-#from sklearn.decomposition import PCA
+# from sklearn.decomposition import PCA
 from sklearn.utils import shuffle
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
-#import math
+# import math
 import torch
 from torch.autograd import Variable
 
@@ -101,14 +101,14 @@ def main():
             y_pred = model(Variable(x_test))
             # Compute and print loss.
             loss_test = loss_fn(y_pred.view(-1), Variable(y_test))
-            R2[t] = (1 - (loss_test.data[0] / den_test)).cpu().numpy()
-            Loss[t] = (loss_test.data[0] / (m - int(p * m))).cpu().numpy()
+            R2[t] = (1 - (loss_test.data[0] / den_test))
+            Loss[t] = (loss_test.data[0] / (m - int(p * m)))
             if R2_besttest > 1 - (loss_test.data[0] / den_test):
                 pass
             else:
                 R2_besttest = (
-                    1 - (loss_test.data[0] / den_test)).cpu().numpy()
-                R2_besttrain = (1 - (loss.data[0] / den)).cpu().numpy()
+                    1 - (loss_test.data[0] / den_test))
+                R2_besttrain = (1 - (loss.data[0] / den))
                 y_best_pred = y_pred
                 k = t + 1
 
@@ -116,11 +116,11 @@ def main():
         if (t + 1) % 100 == 0:
             print('training loss in iter ', t + 1,
                   ': ', loss.data[0].cpu().numpy() / int(p * m))
-            print ('R^2 : ', (1 - (loss.data[0] / den)).cpu().numpy())
+            print ('R^2 : ', (1 - (loss.data[0] / den)))
             print ('test loss=',
-                   (loss_test.data[0] / (m - int(p * m))).cpu().numpy())
+                   (loss_test.data[0] / (m - int(p * m))))
             print ('test R^2 : ',
-                   (1 - (loss_test.data[0] / den_test)).cpu().numpy())
+                   (1 - (loss_test.data[0] / den_test)))
             print ('best step', k)
             print ('best test R^2', R2_besttest)
             print ('best train R^2', R2_besttrain)
