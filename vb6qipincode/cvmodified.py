@@ -194,19 +194,19 @@ if __name__ == '__main__':
         # output += str(epochs) + '\n' + result + '\n'
         # print('R2_bestval=%.5f,' % R2_bestval + 'R2_test=%.5f' % R2_test)
 
-        csvfile = open('./cross_validation/R2-%d_test_seed400.csv' %
+        csvfile = open('R2-%d_test_seed400.csv' %
                        epochs, 'a+', newline='')
         writer = csv.writer(csvfile, delimiter=',')
         writer.writerow(R2_test)
         csvfile.close()
 
-        csvfile = open('./cross_validation/R2-%d_val_seed400.csv' %
+        csvfile = open('R2-%d_val_seed400.csv' %
                        epochs, 'a+', newline='')
         writer = csv.writer(csvfile, delimiter=',')
         writer.writerow(R2_val)
         csvfile.close()
 
-        csvfile = open('./cross_validation/Loss-%d_train_seed400.csv' %
+        csvfile = open('Loss-%d_train_seed400.csv' %
                        epochs, 'a+', newline='')
         writer = csv.writer(csvfile, delimiter=',')
         writer.writerow(Loss)
