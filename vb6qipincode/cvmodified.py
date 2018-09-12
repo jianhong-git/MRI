@@ -156,7 +156,7 @@ def main():
 
 
 if __name__ == '__main__':
-    df = np.genfromtxt('./vb6_validation/seed400.csv', delimiter=',')
+    df = np.genfromtxt('seed400.csv', delimiter=',')
     m, p = df.shape
     df = df[~np.isnan(df).any(1)][:m // 10 * 10, :]
     # D_in, H, D_out = p - 3, 30, 1
